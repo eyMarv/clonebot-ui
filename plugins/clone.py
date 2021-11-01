@@ -39,9 +39,9 @@ async def clone_medias(client: Bot, message: Message):
     fn_caption = bool(query.file_caption)
     #
     if bool(clone_delay):
-        delay = 10
+        delay = 2
     else:
-        delay = 0.25
+        delay = 1
     #
     if start_id > end_id:
         start_id = start_id ^ end_id
@@ -167,13 +167,7 @@ async def clone_medias(client: Bot, message: Message):
                         except FloodWait as e:
                             await asyncio.sleep(e.x)
                         except Exception:
-                            await msg.edit_text(Presets.COPY_ERROR, reply_markup=reply_markup_finished)
-                            await reset_all(id)
-                            file_types.clear()
-                            file_types.extend(Presets.FILE_TYPES)
-                            if not int(total_copied):
-                                await message.delete()
-                            return
+                            pass
                         try:
                             await msg.edit("🇮🇳 | " + progress if pct <= 100 else Presets.BLOCK,
                                            reply_markup=reply_markup_stop)
